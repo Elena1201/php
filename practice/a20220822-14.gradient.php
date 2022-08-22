@@ -15,13 +15,15 @@
 <body>
     <!-- 用for():開頭  endfor;結尾   -->
     <table >
-        <tr>
-            <?php for($k=1; $k<16; $k++): 
-                $c= sprintf("#%X%X00FF", $k, $k)
-            ?>    
-                    <td style="background-color: <?=$c ?>"></td>
-            <?php endfor; ?>
-        </tr>
+        <?php for($i=1; $i<16; $i++): ?> 
+            <tr>
+                <?php for($k=1; $k<16; $k++): 
+                    $c= sprintf("#%X%X00FF", $k, $k, $i, $i )
+                ?>    
+                        <td style="background-color: <?=$c ?>"></td>
+                <?php endfor; ?>
+            </tr>
+        <?php endfor; ?>
     </table>
 
 </body>
