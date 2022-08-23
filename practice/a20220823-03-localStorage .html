@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回上一步資料呈現</title>
+</head>
+<body>
+    <!-- 先製作一個表單 onsubmit="return -->
+    <form name="form1" onsubmit="return false">
+        <input type="text" name="name" placeholder="姓名">
+        <br>
+        <input type="number" name="age" placeholder="年齡">
+        <br>
+
+        <button type="button" onclick="saveData()">下一步</button>
+        <!-- button的預設功能是submit 要記得這邊要改成type="button" -->
+
+    </form>
+
+    <script>
+        //第2 用戶填寫的資料返回上一步後還會有記憶在欄位裡面
+
+        const cacheData = localStorage.getItem('my-key');//讓使用者把資料站存在LocalStorage
+
+        if(cacheData){
+            const cacheObj = JSON.parse(cacheData);
+            document.form1.name.value = cacheObj.name;
+            document.form1.age.value = cacheObj.age;
+
+        }
+
+        //第1 將button 寫一個function帶進去
+        function saveData(){
+            const obj = {
+                name:document.form1.name.value,
+                age:document.form1.age.value,
+            };
+
+            localStorage.setItem("my-key" , JSON.stringify(obj));
+
+            location.href = "a20220823-02-localStorage.html";
+        }
+    </script>
+</body>
+</html>

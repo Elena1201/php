@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>傳統的表單送出</title>
+</head>
+<body>
+    <!-- 這邊的重點 表單的METHOD不要用GET寫 要用POST寫 才會將填寫的資料印在網址上 -->
+
+    <!-- 表單填寫完之後 再傳給a20220823-07-plus-api-post.php 做加總之後再回傳至<span id="c"></span> -->
+    <form name="form1" action="a20220823-07-plus-api-post.php" method="post">
+        <input type="number" name="a"> + 
+        <input type="number" name="b">
+        <button type="submit"> = </button>
+        <span id="c"></span>
+    </form>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</body>
+</html>
+
+<!-- 傳統的表單送出 不用寫JQ 會執行 但是整個表單會重新刷新頁面之後 然後輸出運算出來的值 -->

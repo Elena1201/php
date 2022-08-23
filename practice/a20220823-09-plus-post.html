@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX post</title>
+</head>
+<body>
+    
+    <form name="form1" onsubmit="return false;">
+        <input type="number" name="a"> + 
+        <input type="number" name="b">
+        <button type="button" onclick="sendData()"> = </button>
+        <span id="c"></span>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        // 表單填寫完之後 再傳給a20220823-07-plus-api-post.php 做加總之後再回傳至<span id="c"></span> data屬於回傳後的值
+        function sendData(){
+            
+            $.post(
+                "a20220823-07-plus-api-post.php",
+                $(document.form1).serialize(), // 表單欄位會轉換為 urlencoded 字串
+                function(data){
+                    $("#c").html(data);
+                }
+            );
+        }
+
+    </script>
+
+</body>
+</html>
+<!-- 這邊的重點是 $(document.form1).serialize() 寫法是 所有欄位包再一起寫  -->
