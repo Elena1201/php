@@ -37,6 +37,7 @@ if (!empty($_POST) and $_POST["account"] == "elena" and $_POST["password"] == "1
                 <div>
                 <?php else : ?>
                     <h2><?= $_SESSION['user1']['nickname'] . ' 您好' ?></h2>
+                    <p><a href="a20220825-01.logout.php">登出</a></p>
                 <?php endif ?>
                 </div>
         </div>
