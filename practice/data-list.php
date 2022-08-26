@@ -1,10 +1,10 @@
 <?php
-
 require __DIR__ . "/parts/connect_db.php"; //現在這一支PHP所在的位置
+$pageName = "list"; //頁面名稱
 
 //$sql = "SELECT * FROM address_book"; 
 
-$perPage = 2;  //每一頁呈現4筆
+$perPage = 30;  //每一頁呈現幾筆 2比
 $page = isset($_GET['page']) ? intval($_GET['page']):1;
 
 //isset($_GET['page']) ? (這是一個問句) 如果有符合 後面的intval($_GET['page'])才會呈現 如果不符合會呈現1
@@ -12,6 +12,7 @@ $page = isset($_GET['page']) ? intval($_GET['page']):1;
 
 // 取得資料的總筆數
 $t_sql = "SELECT COUNT(1) FROM address_book";  //SELECT COUNT(1)計算總比數
+//$stmt = $pdo->query($t_sql); + $totalRows = $stmt->fetchAll(); 合併寫在一起
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
 // 計算總頁數
@@ -23,7 +24,7 @@ $rows = [];
 //totalRows(總比數) totalPages(總共的頁數)
 if($totalRows > 0) {
     if($page < 1){
-        header('Location: ?page=1');  
+        header('Location: ?page=1');  //設定擋頭
         //?page=1 總頁數的第1頁  轉向到相同的頁面 
         exit;
     }
@@ -71,7 +72,7 @@ exit;
                     </li>
                     <!-- $i= $page -3; $i<= $page + 3; $i++ 當前選的頁碼 前後都顯示各三頁的頁碼 -->
                     <?php for($i= $page -3; $i<= $page + 3; $i++):
-                        if($i>= 1 and $i <= $totalPages ):
+                        if($i>= 1 and $i <= $totalPages ):   //如ˇ
                         ?>
 
                         <!-- 'active' 是bootstrap裡面的 -->

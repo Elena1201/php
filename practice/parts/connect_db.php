@@ -27,4 +27,10 @@ try{
     echo "Exceprion: ". $ex->getMessage(); //
     }
  //Exceprion: 字串自己定義
+
+//如果 !不是 
+if(! isset($_SESSION)){
+    session_start();
+}
+
 ?>
