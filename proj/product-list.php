@@ -78,7 +78,7 @@ if($totalRows > 0) {
         <?php endforeach; ?>
 
     </div>
-    <div class="row">
+    <div class="row ">
             <div class="col">
                 <nav aria-label="Page navigation example">
                         <ul class="pagination">
