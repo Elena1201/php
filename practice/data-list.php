@@ -1,10 +1,12 @@
 <?php
 require __DIR__ . "/parts/connect_db.php"; //現在這一支PHP所在的位置
+
 $pageName = "list"; //頁面名稱
+$title = "資料列表";
 
 //$sql = "SELECT * FROM address_book"; 
 
-$perPage = 30;  //每一頁呈現幾筆 2比
+$perPage = 30;  //每一頁呈現幾筆 30筆
 $page = isset($_GET['page']) ? intval($_GET['page']):1;
 
 //isset($_GET['page']) ? (這是一個問句) 如果有符合 後面的intval($_GET['page'])才會呈現 如果不符合會呈現1
@@ -88,7 +90,7 @@ exit;
                         </a>
                     </li>
                 </ul>
-            </nav>
+        </nav>
         </div>
     </div>
     <div class="row">
@@ -96,23 +98,47 @@ exit;
         <table class="table table-striped">
         <thead>
             <tr>
+            <th scope="col">
+                <i class="fa-solid fa-trash-can"></i>
+            </th>
                 <th scope="col">#</th>
                 <th scope="col">姓名</th>
                 <th scope="col">email</th>
                 <th scope="col">mobile</th>
                 <th scope="col">birthday</th>
                 <th scope="col">address</th>
+                <th scope="col">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($rows as $r): ?>
                 <tr>
+                    <th>
+                        <a href="javascript: removeItem(<?= $r['sid'] ?>)"
+                            data-onclick=" event.currentTarget.closest('tr').remove()">
+                            <!-- 找到上一層的'tr'currentTarget.closest('tr') 然後 -->
+                        <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </th>
+                    <th><?= $r["sid"] ?></th>
                     <th><?= $r["sid"] ?></th>
                     <th><?= $r["name"] ?></th>
                     <th><?= $r["email"] ?></th>
                     <th><?= $r["mobile"] ?></th>
                     <th><?= $r["birthday"] ?></th>
-                    <th><?= $r["address"] ?></th>
+                    <td><?= htmlentities($r['address']) ?></td>
+                    
+                    <!-- htmlentities 比較建議使用 做html上的跳脫 -->
+
+                    <!-- strip_tags 刪除所有的標籤 -->
+                    <!-- strip_tags("Hello <b>world!</b>")  <b>標簽被去除-->
+                    <th>
+                        <a href="data-edit.php?sid=<?= $r['sid'] ?>">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </th>
                 </tr>
             <?php endforeach ?>
 
@@ -125,4 +151,11 @@ exit;
 
 
 <?php include __DIR__ . "/parts/scripts.php"; ?>
+<script>
+    function removeItem(sid){
+        if(confirm(`是否要刪除編號為${sid}的資料`)){
+            location.href = `data-del.php$sid=${sid}`
+        }
+    }
+</script>
 <?php include __DIR__ . "/parts/html-foot.php"; ?>
