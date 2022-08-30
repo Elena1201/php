@@ -20,11 +20,14 @@
                         <a class="nav-link <?= $pageName=='home' ? 'active' : '' ?>" href="a20220824-09-combine.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName=='list' ? 'active' : '' ?>" href="data-list.php">列表</a>
+                        <a class="nav-link <?= $pageName == 'list' ? 'active' : '' ?>" href="product-list.php">商品</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName=='insert' ? 'active' : '' ?>" href="data-insert.php">新增</a>
+                        <a class="nav-link <?= $pageName == 'cart' ? 'active' : '' ?>" href="cart.php">購物車
+                        <span class="badge text-bg-danger" id="cartCount"></span>
+                    </a>
                     </li>
+
 
                 </ul>
 
@@ -44,11 +47,29 @@
                             <a class="nav-link " href="#">會員註冊</a>
                         </li>
                     <?php endif; ?>
-
-
                 </ul>
 
             </div>
         </div>
     </nav>
 </div>
+<script>
+    //按了加入購物車 會改變購物車數量
+    function showCartCount(obj){
+        let count = 0;
+        
+        for(let k in obj){
+            const item= obj[k];
+            count += +item.qty; //+是讓字串轉型態
+
+        }
+        $("#cartCount").html(count);
+    }
+
+    $.get(
+        "handle-cart.php",
+        function(data){
+            showCartCount(data);
+        },
+        "json");
+</script>
